@@ -165,7 +165,7 @@ function detail(it) {
       <h1 id="pdtitle">${esc(s.name)}</h1>
       <p class="lead">Badrum ${esc(s.id)} · bild ${esc(it.id)}</p>
       <a class="btn dark" href="${webbUrl(it)}" download="${esc(it.seo)}" style="width:100%">Ladda ner bild<br><span class="note" style="color:#bbb">JPG ${it.ww ? it.ww + " × " + it.wh + " px" : ""} · för webb</span></a>
-      <p class="note" style="margin:8px 0 0">Behöver du bilden för tryck? <a class="u" href="${S.contact}" target="_blank" rel="noopener">Kontakta ${esc(S.brand)}</a> och ange bild-ID <b style="font-weight:400;color:#000">${esc(it.id)}</b>.</p>
+      <p class="note" style="margin:8px 0 0">Behöver du bilden för tryck? <a class="u" href="${S.contact}" target="_blank" rel="noopener">Kontakta ${esc(S.brand)}</a> och ange bild-ID <b style="color:#000">${esc(it.id)}</b>.</p>
       <div class="lnk"><input id="lnk" readonly value="${esc(abs)}" aria-label="Fast bildlänk"><button class="btn" type="button" id="cp" style="padding:9px 14px">Kopiera länk</button></div>
       <button class="btn" type="button" id="dp" style="margin-top:10px;width:100%">${picked.has(it.id) ? "✓ Ligger i urvalet" : "Lägg till i urval"}</button>
       <h3>Produkter i badrummet</h3><div class="plist">${plist}</div>
