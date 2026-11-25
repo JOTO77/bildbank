@@ -98,7 +98,7 @@ function buildFilters() {
 
 function prodLine(scene) {
   const by = {};
-  for (const p of SC[scene].products || []) (by[p.brand] = by[p.brand] || []).push(esc(p.name.replace(new RegExp("^" + p.brand + " "), "")) + (p.conf && p.conf !== "Säker" ? "?" : ""));
+  for (const p of SC[scene].products || []) (by[p.brand] = by[p.brand] || []).push(esc(p.name.replace(new RegExp("^" + p.brand + " "), "")));
   const order = [SITES[site].brand, "ROOH", "Bricmate", "Haven", "Tapwell"].filter((v, i, a) => a.indexOf(v) === i);
   return order.filter(b => by[b]).map(b => `<b>${b}</b> ${by[b].join(", ")}`).join(" · ");
 }
@@ -116,7 +116,7 @@ function render() {
   $("sort").value = so.some(s => s[0] === cur) ? cur : "prod";
   let list = siteImgs().filter(i => ok(i)).sort(so.find(s => s[0] === $("sort").value)[2]);
   if ($("one").checked) { const seen = new Set(); list = list.filter(i => !seen.has(i.s) && seen.add(i.s)); }
-  $("count").textContent = `${list.length} bilder från ${new Set(list.map(i => i.s)).size} badrum`;
+  $("count").textContent = "";
   const empty = $("empty"); empty.hidden = list.length > 0;
   empty.innerHTML = siteImgs().length
     ? `Inga bilder matchar dina val. <button class="reset" type="button" id="reset2">Rensa val</button>`
@@ -128,7 +128,7 @@ function render() {
     const c = document.createElement("div"); c.className = "card"; c.tabIndex = 0; c.setAttribute("role", "button");
     c.setAttribute("aria-label", `${s.name}, ${it.id}`);
     c.innerHTML = `<div class="ph"><img loading="lazy" src="bilder/tumnagel/${esc(it.id)}.jpg" alt="${esc(s.name)}"></div>
-      ${it.chk ? '<span class="flag">Granska</span>' : ''}
+      
       <button type="button" class="pick" aria-label="Lägg till ${esc(it.id)} i urval" aria-pressed="${picked.has(it.id)}">${picked.has(it.id) ? "✓" : "+"}</button>
       <div class="cap"><div class="n">${esc(s.name)}</div><div class="id">${esc(it.id)}</div><div class="pr">${prodLine(it.s)}</div></div>`;
     c.onclick = e => { if (e.target.closest(".pick")) { togglePick(it.id); return; } detail(it); };
@@ -151,7 +151,7 @@ function detail(it) {
   const brands = [S.brand, "ROOH", "Bricmate", "Haven", "Tapwell"].filter((v, i, a) => a.indexOf(v) === i);
   const plist = brands.map(b => {
     const ps = prodOf(it.s, b);
-    return `<div><b>${b}</b>${ps.length ? ps.map(p => esc(p.name.replace(new RegExp("^" + b + " "), "")) + (p.conf && p.conf !== "Säker" ? ` <span class="todo">(${esc(p.conf.toLowerCase())}, att bekräfta)</span>` : "")).join("<br>") : '<span class="todo">Inga produkter</span>'}</div>`;
+    return ps.length ? `<div><b>${b}</b>${ps.map(p => esc(p.name.replace(new RegExp("^" + b + " "), ""))).join("<br>")}</div>` : "";
   }).join("");
   const row = (l, v) => `<div><b>${l}:</b><span>${v || "–"}</span></div>`;
   const abs = new URL(webbUrl(it), location.href).href;
@@ -161,7 +161,6 @@ function detail(it) {
       <div class="thumbs">${same.map(i => `<button type="button" aria-label="${esc(i.id)}" aria-current="${i.id === it.id}" data-i="${esc(i.id)}" style="background-image:url('bilder/tumnagel/${esc(i.id)}.jpg')"></button>`).join("")}</div>
       <p class="note">${same.length} bilder från badrum ${esc(s.id)}</p></div>
     <div>
-      ${it.chk ? '<div class="warnbox">Bilden ligger i mappar med olika serie eller färg. Kontrollera innan publicering.</div>' : ''}
       <h1 id="pdtitle">${esc(s.name)}</h1>
       <p class="lead">Badrum ${esc(s.id)} · bild ${esc(it.id)}</p>
       <a class="btn dark" href="${webbUrl(it)}" download="${esc(it.seo)}" style="width:100%">Ladda ner bild<br><span class="note" style="color:#bbb">JPG ${it.ww ? it.ww + " × " + it.wh + " px" : ""} · för webb</span></a>
@@ -169,7 +168,6 @@ function detail(it) {
       <div class="lnk"><input id="lnk" readonly value="${esc(abs)}" aria-label="Fast bildlänk"><button class="btn" type="button" id="cp" style="padding:9px 14px">Kopiera länk</button></div>
       <button class="btn" type="button" id="dp" style="margin-top:10px;width:100%">${picked.has(it.id) ? "✓ Ligger i urvalet" : "Lägg till i urval"}</button>
       <h3>Produkter i badrummet</h3><div class="plist">${plist}</div>
-      <p class="note" style="margin:6px 0 0">Produkter markerade med ? är igenkända från bilden och inte bekräftade ännu.</p>
       <h3>Om bilden</h3>
       <div class="sum">${row("Bild-ID", esc(it.id))}${row("Badrum-ID", esc(s.id))}${row("Filnamn", esc(it.seo))}${row("Storlek", it.ww ? it.ww + " × " + it.wh + " px, JPG" : "")}${row("Format", esc(it.o))}</div>
     </div></div></div>`;
