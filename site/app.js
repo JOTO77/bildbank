@@ -158,8 +158,7 @@ function detail(it) {
   $("ov").innerHTML = `<div class="wrap"><div class="top"><span class="crumb" style="padding:0">Bildbank / ${esc(s.id)} / ${esc(it.id)}</span><button class="x" type="button">Stäng ✕</button></div>
    <div class="pd">
     <div class="big"><img src="${webbUrl(it)}" alt="${esc(s.name)}">
-      <div class="thumbs">${same.map(i => `<button type="button" aria-label="${esc(i.id)}" aria-current="${i.id === it.id}" data-i="${esc(i.id)}" style="background-image:url('bilder/tumnagel/${esc(i.id)}.jpg')"></button>`).join("")}</div>
-      <p class="note">${same.length} bilder från badrum ${esc(s.id)}</p></div>
+      <div class="thumbs">${same.map(i => `<button type="button" aria-label="${esc(i.id)}" aria-current="${i.id === it.id}" data-i="${esc(i.id)}" style="background-image:url('bilder/tumnagel/${esc(i.id)}.jpg')"></button>`).join("")}</div></div>
     <div>
       <h1 id="pdtitle">${esc(s.name)}</h1>
       <p class="lead">Badrum ${esc(s.id)} · bild ${esc(it.id)}</p>
