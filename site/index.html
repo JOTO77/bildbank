@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Testfas: sökmotorer ska inte indexera bildbanken förrän gruppen godkänt den. Ta bort raden då. -->
+<meta name="robots" content="noindex, nofollow">
+<title>Bildbank</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="demo" id="demo" hidden><div class="wrap">
+  <b>Visa som:</b>
+  <div class="sites" id="sites"></div>
+  <span class="note">Samma bildbank, men varje sajt visar sina egna produkter och filter.</span>
+</div></div>
+
+<header class="site" id="siteHeader"><div class="wrap">
+  <a class="logo" id="logo" href="#"></a>
+  <nav class="nav l" id="navl" aria-label="Huvudmeny"></nav>
+  <nav class="nav r" aria-label="Genvägar"><a href="#" id="navSupport">Support</a><a href="#" id="navOm">Om oss</a><a href="https://b2b.tapwellgroup.com/se" target="_blank" rel="noopener">ÅF-portal</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="crumb" id="crumb">Startsida / Support / Bildbank</div>
+
+  <section class="intro" id="intro">
+    <img id="hero" src="assets/hero.jpg" alt="" width="1400" height="1050">
+    <div class="txt">
+      <h1>Bildbank</h1>
+      <p id="lede"></p>
+      <p>Varje badrum har ett eget ID, till exempel B018, och varje bild ett löpnummer, till exempel B018-04. Bilderna laddas ner i webbformat (JPG, högst 2000 px).</p>
+      <p>Behöver du bilder för tryck? <a href="#" id="contact" target="_blank" rel="noopener" class="u">Kontakta oss</a> och ange bild-ID, så skickar vi originalfilen.</p>
+    </div>
+  </section>
+
+  <h2 class="sec">Miljöbilder</h2>
+  <div class="filters" id="filters"></div>
+  <div class="toolbar">
+    <div><div class="chips" id="active"></div><span class="count" id="count"></span></div>
+    <div class="tools">
+      <label class="check"><input type="checkbox" id="one"> En bild per badrum</label>
+      <label for="sort">Sortera</label><select id="sort"></select>
+      <input id="q" type="search" placeholder="Sök badrum eller bild-ID" aria-label="Sök badrum eller bild-ID">
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty" hidden></div>
+  <div class="more" id="more" hidden><button class="btn" type="button" id="moreBtn">Visa fler bilder</button></div>
+</main>
+<footer class="wrap" id="foot"></footer>
+
+<div class="basket" id="basket" hidden><span id="bcount"></span><button class="reset light" type="button" id="bclear">Töm</button><button class="btn" type="button" id="bdl">Ladda ner urval (zip)</button></div>
+<div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="pdtitle"></div>
+<div class="toast" id="toast" hidden role="status"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
