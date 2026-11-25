@@ -2,7 +2,7 @@
 
 En gemensam bildbank med miljöbilder för ROOH, Haven, Bricmate och Tapwell. Samma sida visar olika urval och filter beroende på vilken sajt den bäddas in på.
 
-- **Steg 1 (nu):** fristående sida på GitHub Pages som bäddas in på varje sajt.
+- **Steg 1 (nu):** fristående sida på GitHub Pages som bäddas in på varje sajt. Sidan publiceras från det publika repot `JOTO77/bildbank` på https://joto77.github.io/bildbank/ (samma upplägg som återförsäljarkartan). `Tapwell-Group/bildbank` är det privata huvudrepot; Pages där är bara öppet för medlemmar.
 - **Steg 2 (senare):** bilderna läggs i Litium och sidan byggs in i sajterna. Datan och koden här återanvänds.
 
 Sidan har `noindex` under testfasen, så sökmotorer indexerar den inte. Ta bort raden i `site/index.html` när gruppen har godkänt bildbanken.
@@ -83,7 +83,7 @@ Originalen ligger i marknadsmappen `ROOH › 3 Marknad › Kommunikation › Bil
 Lägg ett textblock på sidan i Litium och klistra in följande i redigerarens källkodsläge ("Source"). Byt `sajt=rooh` mot `haven`, `bricmate` eller `tapwell`. Växla sedan tillbaka till vanligt läge innan du sparar, annars sparas inte ändringen.
 
 ```html
-<style>.content:has(> .tg-bildbank){max-width:none!important;width:100%}.tg-bildbank{height:90vh!important;min-height:760px}</style><object class="tg-bildbank" type="text/html" data="https://tapwell-group.github.io/bildbank/?sajt=rooh" title="Bildbank" style="display:block;width:100%;height:760px;border:0"></object>
+<style>.content:has(> .tg-bildbank){max-width:none!important;width:100%}.tg-bildbank{height:90vh!important;min-height:760px}</style><object class="tg-bildbank" type="text/html" data="https://joto77.github.io/bildbank/?sajt=rooh" title="Bildbank" style="display:block;width:100%;height:760px;border:0"></object>
 ```
 
 - Använd `<object>`, inte `<iframe>`. Litiums CKEditor lägger till `sandbox=""` på iframes, och då slutar JavaScript fungera.
@@ -105,3 +105,21 @@ node scripts/server.mjs   # förhandsvisning på http://localhost:5180
 - Statisk sida (HTML, CSS, JavaScript) utan ramverk. Zip-nedladdning av flera bilder görs med JSZip i webbläsaren.
 - Ingen inloggning, inga cookies, ingen spårning.
 - Typsnittet New Rail är licensierat för bolagens egna domäner och ingår inte här. Sidan använder New Rail om det finns installerat och annars Arial, precis som rooh.se.
+
+## Två repon
+
+Precis som återförsäljarkartan finns bildbanken i två repon med samma innehåll:
+
+| Repo | Synlighet | Används till |
+|---|---|---|
+| `Tapwell-Group/bildbank` | Privat | Huvudrepo. Pages-sidan där kan bara medlemmar öppna. |
+| `JOTO77/bildbank` | Publikt | Publicerar den öppna sidan som bäddas in på sajterna. |
+
+Organisationen tillåter inte publika Pages-sidor, därför behövs det publika repot. Den lokala klonen är inställd så att `git push` skickar till båda:
+
+```bash
+git remote set-url --add --push origin https://github.com/Tapwell-Group/bildbank.git
+git remote set-url --add --push origin https://github.com/JOTO77/bildbank.git
+```
+
+Om ni redigerar en CSV-fil direkt på GitHub, gör det i `JOTO77/bildbank` (det är den som syns på sajterna) och hämta sedan ändringen lokalt och pusha, så att även det privata repot uppdateras.
