@@ -79,22 +79,16 @@ h2.sec{font-size:25.5px;line-height:31.5px;font-weight:300;margin:0 0 18px;lette
 
 /* Rutnät – sex bilder per rad, små bildtexter */
 .grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:24px 14px}
-.card{position:relative;cursor:pointer;outline:none;z-index:0;transition:transform .22s ease,box-shadow .22s ease;background:#fff;transform-origin:center 35%}
+.card{position:relative;cursor:pointer;outline:none;background:#fff}
 .card .ph{aspect-ratio:4/5;background:var(--tile);overflow:hidden}
 .card img{width:100%;height:100%;object-fit:cover;display:block}
 .card .cap{padding:7px 1px 1px}
 .card .n{font-size:13px;line-height:16px;letter-spacing:normal}
 .card .id{font-size:12px;line-height:15px;color:var(--grey2);letter-spacing:normal}
 .card .pr{font-size:11px;line-height:14px;color:var(--grey2);margin-top:3px;letter-spacing:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card:hover .pr,.card:focus-visible .pr{-webkit-line-clamp:unset;display:block}
 .card .pr b{color:var(--ink)}
-.grid .card:nth-child(6n+1){transform-origin:left 35%}
-.grid .card:nth-child(6n){transform-origin:right 35%}
-@media (hover:hover){
-  .card:hover,.card:focus-visible{transform:scale(1.75);z-index:5;box-shadow:0 10px 34px rgba(0,0,0,.22)}
-  .card:hover .cap,.card:focus-visible .cap{padding:7px 7px 7px}
-}
-.card:focus-visible{outline:1px solid #000}
+.card:hover .n{text-decoration:underline}
+.card:focus-visible{outline:1px solid #000;outline-offset:2px}
 .pick{all:unset;position:absolute;top:6px;right:6px;width:24px;height:24px;background:rgba(255,255,255,.92);display:grid;place-items:center;font-size:14px;cursor:pointer}
 .pick[aria-pressed="true"]{background:#000;color:#fff}
 .flag{position:absolute;top:6px;left:6px;font-size:10px;line-height:13px;background:var(--warnbg);color:var(--warn);padding:2px 6px}
@@ -137,9 +131,6 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding-block:28px 40px;
 
 @media (max-width:1200px){
   .grid{grid-template-columns:repeat(4,minmax(0,1fr))}
-  .grid .card:nth-child(6n+1),.grid .card:nth-child(6n){transform-origin:center 35%}
-  .grid .card:nth-child(4n+1){transform-origin:left 35%}
-  .grid .card:nth-child(4n){transform-origin:right 35%}
   .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
   .nav.l{display:none}
 }
@@ -150,4 +141,4 @@ footer{border-top:1px solid var(--line);margin-top:80px;padding-block:28px 40px;
   .nav.r a:not(:last-child){display:none}
 }
 @media (max-width:520px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (prefers-reduced-motion:reduce){.card{transition:none}}
+
