@@ -1,10 +1,11 @@
 /* Typografi och mått enligt rooh.se: allt i vikt 300, ingen fetstil, svart text och grå (#757575) sekundärtext.
-   New Rail används om det finns installerat; annars Inter Light, som ligger närmast och är fri att använda. */
+   New Rail Alphabet Light WEB – samma fil som rooh.se använder, från ROOH:s grafiska profil. */
+@font-face{font-family:"New Rail Alphabet";src:url("assets/fonts/NewRailAlphabet-LightWEB.woff") format("woff");font-weight:100 900;font-style:normal;font-display:swap}
 :root{
   color-scheme:light;
   --bg:#ffffff; --ink:#000; --grey:#757575; --grey2:#878687; --line:#d9d9d9; --box:#bdbdbd; --btn:#e2e2e2; --btnh:#d2d2d2; --tile:#f2f2f2;
   --warn:#8a5a14; --warnbg:#f7efe2; --demo:#eef1f4;
-  --font:newRail,"New Rail Alphabet","Inter","newRail Fallback",Arial,Helvetica,sans-serif;
+  --font:"New Rail Alphabet",newRail,Arial,Helvetica,sans-serif;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}

@@ -104,7 +104,7 @@ node scripts/server.mjs   # förhandsvisning på http://localhost:5180
 
 - Statisk sida (HTML, CSS, JavaScript) utan ramverk. Zip-nedladdning av flera bilder görs med JSZip i webbläsaren.
 - Ingen inloggning, inga cookies, ingen spårning.
-- Typsnittet New Rail är licensierat för bolagens egna domäner och ingår inte här. Sidan använder New Rail om det finns installerat och annars Arial, precis som rooh.se.
+- Typsnittet är New Rail Alphabet Light (webbversionen, `site/assets/fonts/`), samma fil som rooh.se använder. Den kommer från ROOH:s grafiska profil och används med godkännande från ROOH.
 
 ## Två repon
 
