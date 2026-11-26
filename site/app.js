@@ -100,7 +100,8 @@ function prodLine(scene) {
   const by = {};
   for (const p of SC[scene].products || []) (by[p.brand] = by[p.brand] || []).push(esc(p.name.replace(new RegExp("^" + p.brand + " "), "")));
   const order = [SITES[site].brand, "ROOH", "Bricmate", "Haven", "Tapwell"].filter((v, i, a) => a.indexOf(v) === i);
-  return order.filter(b => by[b]).map(b => `<b>${b}</b> ${by[b].join(", ")}`).join(" · ");
+  // Den egna sajtens produkter visas med namn, övriga bolag bara med varumärke.
+  return order.filter(b => by[b]).map(b => b === SITES[site].brand ? `<b>${b}</b> ${by[b].join(", ")}` : `<b>${b}</b>`).join(" · ");
 }
 
 function render() {
@@ -151,7 +152,9 @@ function detail(it) {
   const brands = [S.brand, "ROOH", "Bricmate", "Haven", "Tapwell"].filter((v, i, a) => a.indexOf(v) === i);
   const plist = brands.map(b => {
     const ps = prodOf(it.s, b);
-    return ps.length ? `<div><b>${b}</b>${ps.map(p => esc(p.name.replace(new RegExp("^" + b + " "), ""))).join("<br>")}</div>` : "";
+    if (!ps.length) return "";
+    if (b !== S.brand) return `<div>${b}</div>`;
+    return `<div><b>${b}</b>${ps.map(p => esc(p.name.replace(new RegExp("^" + b + " "), ""))).join("<br>")}</div>`;
   }).join("");
   const row = (l, v) => `<div><b>${l}:</b><span>${v || "–"}</span></div>`;
   const abs = new URL(webbUrl(it), location.href).href;
